@@ -14,7 +14,7 @@
   }
 
 /* main関数 */
-function myFunction(test,count,subscript_count) {
+function myFunction(out_put_text,count) {
   //変数の宣言
   var arr_test1=[]
   var flg=0
@@ -23,11 +23,11 @@ function myFunction(test,count,subscript_count) {
     if (i!=0){
       subscript_count=subscript_count+1
     }
-    var matched = test[i]['body'].match(/(https?:\/\/[\w!?\/+_~=;.,*&@#$%()'[\]-]+)/m);
+    var matched = out_put_text[i]['body'].match(/(https?:\/\/[\w!?\/+_~=;.,*&@#$%()'[\]-]+)/m);
     var strMessage = matched ? matched[1] : "";
     arr_test1[subscript_count]=strMessage
     if (strMessage!=null){
-      var text=test[i]['body']
+      var text=out_put_text[i]['body']
       while(flg==0){
         if (subscript_count==0){
           text=text.replace(strMessage, "");
@@ -54,13 +54,13 @@ function myFunction(test,count,subscript_count) {
 }
 var token=""
 var room_id=""
-var test=fetchMessage(token,room_id)
+var out_put_text=fetchMessage(token,room_id)
 if (test.length==0){
   Logger.log('投稿がありませんでした')
 }else{
   Logger.log(test.length+'件の投稿がありました')
   count=test.length
-  myFunction(test,count)
+  myFunction(out_put_text,count)
 }
 
 
