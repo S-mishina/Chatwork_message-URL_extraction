@@ -5,10 +5,3 @@
 
 ## 環境設定
 
-* var token=""
-* var room_id=""
-<pre>
-chatworkAPI Tokenと<br>
-chatwork Room_idを入力する.
-</pre>
-
