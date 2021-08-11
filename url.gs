@@ -1,5 +1,9 @@
 /* チャットワークからメッセージ取得 */
   function fetchMessage(token,room_id){
+    //token
+    var token = PropertiesService.getScriptProperties().getProperty("token");
+    //room_id
+    var room_id = PropertiesService.getScriptProperties().getProperty("room_id");  
     var params = {
       headers : {"X-ChatWorkToken" : token},
       method : "get"
@@ -13,7 +17,6 @@
     }
   }
 
-/* main関数 */
 function myFunction(test,count,subscript_count) {
   //変数の宣言
   //================//
@@ -73,22 +76,19 @@ function myFunction(test,count,subscript_count) {
     mySheet.getRange(lastRow,2).setValue(arr_name[i]);
   }
 }
-//チャットワークのトークンを書き込む
-var token=""
-//ルームIDを書き込む
-var room_id=""
-//チャットワーク取得する関数を実行する(件数取得)
-var test=fetchMessage(token,room_id)
-//投稿がない場合
-if (test.length==0){
-  Logger.log('投稿がありませんでした')
-//メッセージがある場合
-}else{
-  Logger.log(test.length+'件の投稿がありました')
-  //件数
-  count=test.length
-  //URL抽出プログラムの実行
-  myFunction(test,count)
+function main(){
+  //チャットワーク取得する関数を実行する(件数取得)
+  var test=fetchMessage()
+  //投稿がない場合
+  if (test.length==0){
+    Logger.log('投稿がありませんでした')
+  //メッセージがある場合
+  }else{
+    Logger.log(test.length+'件の投稿がありました')
+    //件数
+    count=test.length
+    //URL抽出プログラムの実行
+    myFunction(test,count)
+  }
 }
-
-
+main()
